@@ -1,0 +1,106 @@
+<div class="container">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit()">  
+                <table>
+                  <tr>
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width">
+                            <input formControlName="EmpId" matTooltip="Enter Employee ID" matInput placeholder="Employee ID"
+                                [readonly]="isReadOnly"
+                                [ngClass]="{
+                                  'gray' : isReadOnly,
+                                  'no-gray' : !isReadOnly
+                               }">
+                        </mat-form-field>
+                        <mat-error>
+                            <span *ngIf="!employeeForm.get('EmpId').value && employeeForm.get('EmpId').touched"></span>
+                        </mat-error>
+                    </td>  
+                    <td class="tbl1">
+                      <mat-form-field class="demo-full-width">
+                        <input formControlName="EmpName" matTooltip="Enter Employee Name" matInput placeholder="Employee Name">
+                      </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="!employeeForm.get('EmpName').value && employeeForm.get('EmpName').touched"></span>
+                      </mat-error>
+                    </td>  
+                    <td class="tbl1">
+                        <mat-form-field>
+                            <mat-select formControlName="DeptId" name="Department" matInput placeholder="Select Department">
+                                <mat-option *ngFor="let dept of departmentList" [value]="dept.DeptId">
+                                    {{dept.DeptName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="!employeeForm.get('DeptId').value && employeeForm.get('DeptId').touched"></span>
+                        </mat-error>
+                    </td>                     
+                  </tr>
+                  <tr>
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width">
+                            <input formControlName="EmailId" matTooltip="Enter EmailId" matInput placeholder="EmailId">
+                        </mat-form-field>
+                        <mat-error>
+                            <span *ngIf="!employeeForm.get('EmailId').value && employeeForm.get('EmailId').touched"></span>
+                        </mat-error>
+                    </td> 
+                    <td class="tbl1">
+                       <mat-radio-group matTooltip="Select Gender" formControlName="Gender">
+                          <mat-radio-button value="0">Male</mat-radio-button>&nbsp;&nbsp;
+                          <mat-radio-button value="1">Female</mat-radio-button>
+                       </mat-radio-group>
+                      <mat-error>
+                        <span *ngIf="!employeeForm.get('Gender').value && employeeForm.get('Gender').touched"></span>
+                      </mat-error>
+                    </td>
+                    <td  class="tbl1">
+                        <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button" 
+                            [disabled]="!employeeForm.valid">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>
+                    </td> 
+                  </tr>
+                  <tr>
+                    <td>
+                        <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
+                            {{massage}}
+                        </p>
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
+                <br><br>
+                <div *ngIf='Employees'>
+                    <table class="table" >
+                        <tr ngClass="btn-primary">
+                            <th class="tbl2">Employee ID</th>
+                            <th class="tbl2">Employee Name</th>
+                            <!-- <th class="tbl2">Email Id</th>
+                            <th class="tbl2">Gender</th> -->
+                            <th class="tbl2">Edit</th>
+                            <th class="tbl2">Delete</th>
+                        </tr>
+                        <tr *ngFor="let employee of Employees | async">
+                            
+                            <td class="tbl2"><a class="empId" id="empId-{{employee.EmpId}}" [title]="employee.EmpId" 
+                              [routerLink]="['/employeedetail', employee.EmpId]">{{ employee.EmpId }}</a></td>
+                            <td class="tbl2">{{employee.EmpName}}</td>
+                            <!-- <td class="tbl2">{{employee.EmailId}}</td>
+                            <td class="tbl2">{{employee.Gender | Gender}}</td> -->
+                            <td class="tbl2">
+                            <button type="button" class="btn btn-info" matTooltip="Click Edit Button" (click)="loadEmployeeToEdit(employee.EmpId)">Edit</button>
+                            </td>
+                            <td class="tbl2">
+                            <button type="button" class="btn btn-danger" matTooltip="Click Delete Button" (click)="deleteEmployee(employee.EmpId)">Delete</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+        </form>
+      </mat-card-content>
+    </mat-card>   
+</div>
+

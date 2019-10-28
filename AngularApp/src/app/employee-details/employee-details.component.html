@@ -1,0 +1,21 @@
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <div *ngIf='Employee'>
+                <h4>Employee Details of {{Employee.EmpName}}</h4><hr> 
+                <mat-label>Employee ID: {{Employee.EmpId}}</mat-label><br>
+                <mat-label>Employee Name: {{Employee.EmpName}}</mat-label><br>
+                <mat-label>Employee Email: {{Employee.EmailId}}</mat-label><br>
+                <mat-label>Employee Gender: {{Employee.Gender | Gender}}</mat-label><br>
+                <mat-label>Department: {{DeptName}}</mat-label>
+            </div>
+            <br>
+            <div>
+                <a title='Back' [routerLink]="['/']">Back</a>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+

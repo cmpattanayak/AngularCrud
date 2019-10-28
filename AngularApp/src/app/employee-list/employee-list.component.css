@@ -1,0 +1,21 @@
+th,td{
+    text-align: center;
+}
+th{
+    background-color:#293956;
+    color: white;
+}
+.tbl1
+{
+    width: 400px;
+}
+.tbl2
+{
+    width: 200px;
+}
+.gray{
+    background-color: grey;
+}
+.no-gray{
+    background-color: white;
+}
